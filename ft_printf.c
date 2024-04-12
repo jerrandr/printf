@@ -6,7 +6,7 @@
 /*   By: jerrandr <jerrandr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 12:36:43 by jerrandr          #+#    #+#             */
-/*   Updated: 2024/04/12 09:03:06 by jerrandr         ###   ########.fr       */
+/*   Updated: 2024/04/12 10:55:58 by jerrandr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int	ft_printf(const char *str, ...)
 	va_start(args, str);
 	while (str[i])
 	{
-		if (str[i] && ft_strchr("cspdiuxX%", str[i]))
+		if (str[i] == '%' && ft_strchr("cspdiuxX%", str[i]))
 			count += ft_get_value(str[++i], args);
 		else
 			count += ft_putchar(str[i]);
