@@ -6,7 +6,7 @@
 /*   By: jerrandr <jerrandr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 12:52:23 by jerrandr          #+#    #+#             */
-/*   Updated: 2024/04/09 09:54:50 by jerrandr         ###   ########.fr       */
+/*   Updated: 2024/04/12 08:27:27 by jerrandr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,42 +22,22 @@ int	ft_strlen(char *str)
 	return (i);
 }
 
-int    ft_putchar(int c)
+int	ft_putchar(int c)
 {
-	return(write(1, &c, 1));
+	return (write(1, &c, 1));
 }
 
 int	ft_putstr(char *str)
 {
-	int i;
-
-	i = 0;
-	while (str[i])
-		ft_putchar(str[i]);
-		i++;
-	return (i);
-}
-
-int	ft_putnbr(int n)
-{
-	long int	nb;
 	int	i;
 
 	i = 0;
-	nb = n;
-	if (nb < 0)
+	if (!str)
+		return (write(1, "(null)", 6));
+	while (str[i] != '\0')
 	{
-		ft_putchar('-');
-		nb = -nb;
-	}
-	if (nb < 10)
-		ft_putchar((nb + '0'));
+		ft_putchar(str[i]);
 		i++;
-	if (nb >= 10)
-	{
-		i++;
-		ft_putnbr((nb / 10));
-		ft_putchar((nb % 10) + '0');
 	}
 	return (i);
 }
@@ -78,4 +58,28 @@ char	*ft_strchr(const char *s, int c)
 		i++;
 	}
 	return (0);
+}
+
+int	ft_putnbr(int n)
+{
+	long int	nb;
+	int			i;
+
+	i = 0;
+	nb = n;
+	if (nb < 0)
+	{
+		i += ft_putchar('-');
+		nb = -nb;
+	}
+	if (nb < 10)
+	{
+		i += ft_putchar((nb + '0'));
+	}
+	if (nb >= 10)
+	{
+		i += ft_putnbr((nb / 10));
+		i += ft_putchar((nb % 10) + '0');
+	}
+	return (i);
 }
